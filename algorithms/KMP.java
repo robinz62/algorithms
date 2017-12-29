@@ -55,6 +55,7 @@ public class KMP {
         String word = sc.nextLine();
         System.out.print("enter text: ");
         String text = sc.nextLine();
+        sc.close();
 
         System.out.print("kmp array : ");
         System.out.println(java.util.Arrays.toString(getKmpArray(word)));
