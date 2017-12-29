@@ -1,5 +1,6 @@
 /**
- * Implementation of the Knuth-Morris-Pratt string searching algorithm.
+ * Implementation of the Knuth-Morris-Pratt string searching algorithm. Runs
+ * in O(m + n).
  */
 public class KMP {
 
