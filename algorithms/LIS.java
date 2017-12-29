@@ -13,32 +13,27 @@ public class LIS {
         // dp[i] is the index of the smallest element that terminates an
         // increasing subsequence of length i + 1.
         Integer[] dp = new Integer[arr.length];
-        dp[0] = 0;
 
         // to[i] contains the index of the previous element for the increasing
         // subsequence ending at index i. used for reconstructing the solution.
         int[] to = new int[arr.length];
-        to[0] = -1;
 
         // stores the length of the longest increasing subsequence found.
-        int len = 1;
+        int len = 0;
 
-        for (int i = 1; i < arr.length; ++i) {
-            if (arr[i] > arr[dp[len - 1]]) {
-                dp[len] = i;
-                to[i] = dp[len - 1];
-                ++len;
-            } else {
-                int idx = java.util.Arrays.<Integer>binarySearch(dp, 0, len, i,
-                    new java.util.Comparator<Integer>() {
-                        public int compare(Integer a, Integer b) {
-                            return Integer.compare(arr[a], arr[b]);
-                        }
-                    });
-                if (idx < 0) {
-                    idx = -idx - 1;
-                    dp[idx] = i;
-                    to[i] = idx > 0 ? dp[idx - 1] : -1;
+        for (int i = 0; i < arr.length; ++i) {
+            int idx = java.util.Arrays.<Integer>binarySearch(dp, 0, len, i,
+                new java.util.Comparator<Integer>() {
+                    public int compare(Integer a, Integer b) {
+                        return Integer.compare(arr[a], arr[b]);
+                    }
+                });
+            if (idx < 0) {
+                idx = -idx - 1;
+                dp[idx] = i;
+                to[i] = idx > 0 ? dp[idx - 1] : -1;
+                if (idx == len) {
+                    ++len;
                 }
             }
         }
@@ -62,20 +57,17 @@ public class LIS {
         // dp[i] is the smallest element that terminates an increasing
         // subsequence of length i + 1.
         int[] dp = new int[arr.length];
-        dp[0] = arr[0];
 
         // stores the length of the longest increasing subsequence found.
-        int len = 1;
+        int len = 0;
 
-        for (int i = 1; i < arr.length; ++i) {
-            if (arr[i] > dp[len - 1]) {
-                dp[len] = arr[i];
-                ++len;
-            } else {
-                int idx = java.util.Arrays.binarySearch(dp, 0, len, arr[i]);
-                if (idx < 0) {
-                    idx = -idx - 1;
-                    dp[idx] = arr[i];
+        for (int i : arr) {
+            int idx = java.util.Arrays.binarySearch(dp, 0, len, i);
+            if (idx < 0) {
+                idx = -idx - 1;
+                dp[idx] = i;
+                if (idx == len) {
+                    ++len;
                 }
             }
         }
@@ -92,7 +84,7 @@ public class LIS {
         for (int i = 0; i < numStr.length; ++i) {
             nums[i] = Integer.parseInt(numStr[i]);
         }
-        
+
         int[] indices = lis(nums);
         int[] numbers = new int[indices.length];
         for (int i = 0; i < indices.length; ++i) {
