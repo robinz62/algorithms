@@ -54,5 +54,4 @@ public class UnionFind {
 	public int getNumComponents() {
 		return numComponents;
 	}
-
 }
