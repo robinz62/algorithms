@@ -1,3 +1,6 @@
+import java.util.List;
+import java.util.ArrayList;
+
 /**
  * A disjoint-set data structure with n elements labeled [0, n - 1]
  */
