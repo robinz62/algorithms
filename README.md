@@ -7,4 +7,5 @@ verify correctness (hopefully)).
 * `/algorithms`: miscellaneous algorithms
 * `/data-structures`: data structures
   * `/minified`: same data structures but with reduced code length (e.g. no
-    comments, no exception checking) and non-public privacy (for copy pasting).
+    comments, reduced exception checking) and non-public privacy (for copy
+    pasting).
