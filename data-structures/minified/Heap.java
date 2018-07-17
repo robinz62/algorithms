@@ -65,9 +65,7 @@ class Heap<V, Key> {
 
     public Set<V> values() {
         Set<V> values = new HashSet<V>();
-        for (Entry<V, Key> e : heap) {
-            values.add(e.getValue());
-        }
+        for (Entry<V, Key> e : heap) values.add(e.getValue());
         return values;
     }
 

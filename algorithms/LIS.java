@@ -86,7 +86,6 @@ public class LIS {
      * won't bother overloading the lengthOfLis(...) method. The length of
      * course can be found by taking the length of the result array.
      */
-
     public static <T extends Comparable<? super T>> int[] lis(T[] nums) {
         Integer[] dp = new Integer[nums.length];
         int[] to = new int[nums.length];

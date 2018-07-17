@@ -21,9 +21,9 @@ class UnionFind {
         else if (rank[x] > rank[y]) parent[y] = x;
         else {
             parent[x] = y;
-            ++rank[y];
+            rank[y]++;
         }
-        --numComponents;
+        numComponents--;
     }
 
     public int find(int u) {

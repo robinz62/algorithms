@@ -52,9 +52,9 @@ public class UnionFind {
             parent[y] = x;
         } else {
             parent[x] = y;
-            ++rank[y];
+            rank[y]++;
         }
-        --numComponents;
+        numComponents--;
     }
 
     /**
