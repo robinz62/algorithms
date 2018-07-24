@@ -1,7 +1,7 @@
 import java.util.*;
 
 /**
- * Contains various basic algorithms related to number theory.
+ * Contains various basic algorithms related to integer factors.
  */
 public class Factors {
 
@@ -24,12 +24,12 @@ public class Factors {
     }
 
     /**
-     * Returns the prime factorization of the specified number.
+     * Returns the prime factorization of the specified number O(sqrt n)
      * 
      * @param n the number to prime-factorize.
      * @return a map containing the prime factors and their counts.
      */
-    public Map<Integer, Integer> primeFactorization(int n) {
+    public Map<Integer, Integer> primeFactorize(int n) {
         Map<Integer, Integer> pFactors = new HashMap<>();
         while (n % 2 == 0) {
             pFactors.put(2, pFactors.getOrDefault(2, 0) + 1);
@@ -54,7 +54,7 @@ public class Factors {
      * @param sp the smallest-prime array
      * @return a map containing the prime factors and their counts.
      */
-    public Map<Integer, Integer> primeFactorization(int n, int[] sp) {
+    public Map<Integer, Integer> primeFactorize(int n, int[] sp) {
         Map<Integer, Integer> pFactors = new HashMap<>();
         while (n != 1) {
             pFactors.put(sp[n], pFactors.getOrDefault(sp[n], 0) + 1);

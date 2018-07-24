@@ -1,6 +1,4 @@
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 /**
  * Implementations of the solution to the Longest Increasing Subsequence problem
@@ -219,7 +217,7 @@ public class LIS {
     }
 
     public static void main(String[] args) {
-        java.util.Scanner sc = new java.util.Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
         System.out.print("enter space-separated numbers: ");
         String line = sc.nextLine();
         sc.close();
@@ -235,8 +233,8 @@ public class LIS {
             numbers[i] = nums[indices[i]];
         }
         System.out.print("indices: ");
-        System.out.println(java.util.Arrays.toString(indices));
+        System.out.println(Arrays.toString(indices));
         System.out.print("numbers: ");
-        System.out.println(java.util.Arrays.toString(numbers));
+        System.out.println(Arrays.toString(numbers));
     }
 }
