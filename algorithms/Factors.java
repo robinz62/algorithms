@@ -113,4 +113,15 @@ public class Factors {
     public int gcd(int a, int b) {
         return a == 0 ? b : gcd(b % a, a);
     }
+
+    /**
+     * Returns the least common multiple of the specified numbers.
+     * 
+     * @param a the first number.
+     * @param b the second number.
+     * @return the least common multiple.
+     */
+    public int lcm(int a, int b) {
+        return a * b / gcd(a, b);
+    }
 }
