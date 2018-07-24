@@ -27,7 +27,7 @@ public class Factors {
      * Returns the prime factorization of the specified number.
      * 
      * @param n the number to prime-factorize.
-     * @return a map containing prime factors and their counts.
+     * @return a map containing the prime factors and their counts.
      */
     public Map<Integer, Integer> primeFactorization(int n) {
         Map<Integer, Integer> pFactors = new HashMap<>();
@@ -45,7 +45,63 @@ public class Factors {
         return pFactors;
     }
 
-    // TODO: log n factorization query (using sieve)
+    /**
+     * Returns the prime factorization of the specified number, using the
+     * precomputed smallest-prime array (sp, where sp[i] is the smallest prime
+     * factor of i) for O(log n) time.
+     * 
+     * @param n the number to prime-factorize.
+     * @param sp the smallest-prime array
+     * @return a map containing the prime factors and their counts.
+     */
+    public Map<Integer, Integer> primeFactorization(int n, int[] sp) {
+        Map<Integer, Integer> pFactors = new HashMap<>();
+        while (n != 1) {
+            pFactors.put(sp[n], pFactors.getOrDefault(sp[n], 0) + 1);
+            n /= sp[n];
+        }
+        return pFactors;
+    }
+
+    /**
+     * Computes and returns an array prime, where prime[i] is true if i is
+     * prime and false otherwise (for i <= n). Implemented using sieve of
+     * eratosthenes.
+     * 
+     * @param n the upper limit of the sieve.
+     * @return the prime array.
+     */
+    public boolean[] sieve(int n) {
+        boolean[] prime = new boolean[n + 1];
+        for (int i = 2; i <= n; i++) primes[i] = true;
+        for (int i = 2; i <= n; i++) {
+            if (prime[i]) {
+                for (int j = 2 * i; j <= n; j += i) prime[j] = false;
+            }
+        }
+        return prime;
+    }
+
+    /**
+     * Computes and returns an array sp, where sp[i] is the smallest prime
+     * factor of i (for 2 <= i <= n). Implemented using sieve of eratosthenes.
+     * 
+     * @param n the upper limit of the sieve.
+     * @return the smallest-prime array.
+     */
+    public int[] smallestPrime(int n) {
+        int[] sp = new int[n + 1];
+        for (int i = 1; i <= n; i += 2) sp[i] = i;
+        for (int i = 2; i <= n; i += 2) sp[i] = 2;
+        for (int i = 3; i * i <= n; i += 2) {
+            if (sp[i] == i) {
+                for (int j = i * i; j <= n; j += i) {
+                    if (sp[j] == j) sp[j] = i;
+                }
+            }
+        }
+        return sp;
+    }
 
     /**
      * Returns the greatest common denominator of the specified numbers.
@@ -55,9 +111,6 @@ public class Factors {
      * @return the greatest common denominator.
      */
     public int gcd(int a, int b) {
-        if (a == 0) {
-            return b;
-        }
-        return gcd(b % a, a);
+        return a == 0 ? b : gcd(b % a, a);
     }
 }
