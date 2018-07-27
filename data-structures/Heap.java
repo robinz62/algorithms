@@ -73,7 +73,7 @@ public class Heap<V, Key> {
      * @throws IllegalArgumentException if the provided key is {@code null}
      */
     public void add(V value, Key key) {
-        if (key == null) {
+        if (containsValue(value) || key == null) {
             throw new IllegalArgumentException();
         }
         heap.add(new Entry<>(value, key));
