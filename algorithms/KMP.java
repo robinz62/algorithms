@@ -1,3 +1,5 @@
+import java.util.*;
+
 /**
  * Implementation of the Knuth-Morris-Pratt string searching algorithm. Runs
  * in O(m + n).
@@ -50,7 +52,7 @@ public class KMP {
     }
 
     public static void main(String[] args) {
-        java.util.Scanner sc = new java.util.Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
         System.out.print("enter word: ");
         String word = sc.nextLine();
         System.out.print("enter text: ");

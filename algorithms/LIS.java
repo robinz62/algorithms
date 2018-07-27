@@ -19,18 +19,14 @@ public class LIS {
      * 
      * len stores the length of the longest increasing subsequence found.
      */
-    public static <T> int[] lis(T[] nums, Comparator<? super T> c) {
+    public static int[] lis(int[] nums) {
         Integer[] dp = new Integer[nums.length];
         int[] to = new int[nums.length];
         int len = 0;
 
         for (int i = 0; i < nums.length; ++i) {
             int idx = Arrays.binarySearch(dp, 0, len, i,
-                new Comparator<Integer>() {
-                    public int compare(Integer a, Integer b) {
-                        return c.compare(nums[a], nums[b]);
-                    }
-                });
+                (a, b) -> Integer.compare(nums[a], nums[b]));
             if (idx < 0) {
                 idx = -idx - 1;
                 dp[idx] = i;
@@ -79,89 +75,18 @@ public class LIS {
         return len;
     }
 
-    /*
-     * Overloaded variants of lis(...) are available below for convenience. I
-     * won't bother overloading the lengthOfLis(...) method. The length of
-     * course can be found by taking the length of the result array.
-     */
-    public static <T extends Comparable<? super T>> int[] lis(T[] nums) {
+    // Overloaded variants below for
+    //   - array of generics
+    //   - list of generics
+
+    public static <T> int[] lis(T[] nums, Comparator<? super T> c) {
         Integer[] dp = new Integer[nums.length];
         int[] to = new int[nums.length];
         int len = 0;
 
         for (int i = 0; i < nums.length; ++i) {
             int idx = Arrays.binarySearch(dp, 0, len, i,
-                new Comparator<Integer>() {
-                    public int compare(Integer a, Integer b) {
-                        return nums[a].compareTo(nums[b]);
-                    }
-                });
-            if (idx < 0) {
-                idx = -idx - 1;
-                dp[idx] = i;
-                to[i] = idx > 0 ? dp[idx - 1] : -1;
-                if (idx == len) {
-                    ++len;
-                }
-            }
-        }
-
-        int[] indices = new int[len];
-        int i = indices.length - 1;
-        int curr = dp[len - 1];
-        while (curr != -1) {
-            indices[i--] = curr;
-            curr = to[curr];
-        }
-
-        return indices;
-    }
-
-    public static int[] lis(int[] nums) {
-        Integer[] dp = new Integer[nums.length];
-        int[] to = new int[nums.length];
-        int len = 0;
-
-        for (int i = 0; i < nums.length; ++i) {
-            int idx = Arrays.binarySearch(dp, 0, len, i,
-                new Comparator<Integer>() {
-                    public int compare(Integer a, Integer b) {
-                        return Integer.compare(nums[a], nums[b]);
-                    }
-                });
-            if (idx < 0) {
-                idx = -idx - 1;
-                dp[idx] = i;
-                to[i] = idx > 0 ? dp[idx - 1] : -1;
-                if (idx == len) {
-                    ++len;
-                }
-            }
-        }
-
-        int[] indices = new int[len];
-        int i = indices.length - 1;
-        int curr = dp[len - 1];
-        while (curr != -1) {
-            indices[i--] = curr;
-            curr = to[curr];
-        }
-
-        return indices;
-    }
-
-    public static <T extends Comparable<? super T>> int[] lis(List<T> nums) {
-        Integer[] dp = new Integer[nums.size()];
-        int[] to = new int[nums.size()];
-        int len = 0;
-
-        for (int i = 0; i < nums.size(); ++i) {
-            int idx = Arrays.binarySearch(dp, 0, len, i,
-                new Comparator<Integer>() {
-                    public int compare(Integer a, Integer b) {
-                        return nums.get(a).compareTo(nums.get(b));
-                    }
-                });
+                (a, b) -> c.compare(nums[a], nums[b]));
             if (idx < 0) {
                 idx = -idx - 1;
                 dp[idx] = i;
@@ -190,11 +115,7 @@ public class LIS {
 
         for (int i = 0; i < nums.length; ++i) {
             int idx = Arrays.binarySearch(dp, 0, len, i,
-                new Comparator<Integer>() {
-                    public int compare(Integer a, Integer b) {
-                        return c.compare(nums.get(a), nums.get(b));
-                    }
-                });
+                (a, b) -> c.compare(nums.get(a), nums.get(b)));
             if (idx < 0) {
                 idx = -idx - 1;
                 dp[idx] = i;
