@@ -1,5 +1,7 @@
 import java.util.*;
 
+// TODO: this functions should be tested
+
 /**
  * Contains various basic algorithms related to integer factors.
  */
@@ -65,18 +67,22 @@ public class Factors {
 
     /**
      * Computes and returns an array prime, where prime[i] is true if i is
-     * prime and false otherwise (for i <= n). Implemented using sieve of
-     * eratosthenes.
+     * prime and false otherwise (for i <= n). Implemented using linear sieve.
      * 
      * @param n the upper limit of the sieve.
      * @return the prime array.
      */
     public boolean[] sieve(int n) {
+        List<Integer> primes = new ArrayList<>();
         boolean[] prime = new boolean[n + 1];
-        for (int i = 2; i <= n; i++) primes[i] = true;
+        Arrays.fill(prime, true);
         for (int i = 2; i <= n; i++) {
             if (prime[i]) {
-                for (int j = 2 * i; j <= n; j += i) prime[j] = false;
+                primes.add(i);
+                for (int j = 0; j < primes.size() && i * primes.get(j) <= n; j++) {
+                    prime[i * primes.get(j)] = false;
+                    if (i % primes.get(j) == 0) break;
+                }
             }
         }
         return prime;
@@ -91,12 +97,12 @@ public class Factors {
      */
     public int[] smallestPrime(int n) {
         int[] sp = new int[n + 1];
-        for (int i = 1; i <= n; i += 2) sp[i] = i;
         for (int i = 2; i <= n; i += 2) sp[i] = 2;
         for (int i = 3; i * i <= n; i += 2) {
             if (sp[i] == i) {
                 for (int j = i * i; j <= n; j += i) {
-                    if (sp[j] == j) sp[j] = i;
+                    if (sp[j] != 0) break;
+                    if (sp[j] == 0) sp[j] = i;
                 }
             }
         }
