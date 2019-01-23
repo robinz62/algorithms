@@ -1,16 +1,16 @@
 import java.util.*;
 
-class Heap<V, Key> {
-    private List<Entry<V, Key>> heap;
+class Heap<V, K> {
+    private List<Entry> heap;
     private Map<V, Integer> indexOfValue;
-    private Comparator<Key> comparator;
+    private Comparator<K> comparator;
 
     public Heap() {
         heap = new ArrayList<>();
         indexOfValue = new HashMap<>();
     }
 
-    public Heap(Comparator<Key> comparator) {
+    public Heap(Comparator<K> comparator) {
         this();
         this.comparator = comparator;
     }
@@ -27,20 +27,20 @@ class Heap<V, Key> {
         return indexOfValue.containsKey(value);
     }
 
-    public void add(V value, Key key) {
-        heap.add(new Entry<>(value, key));
+    public void add(V value, K key) {
+        heap.add(new Entry(value, key));
         indexOfValue.put(value, heap.size() - 1);
         decreaseKey(value, key);
     }
 
-    public void decreaseKey(V value, Key newKey) {
+    public void decreaseKey(V value, K newKey) {
         int i = indexOfValue.get(value);
         if (compare(newKey, heap.get(i).getKey()) > 0) {
             throw new IllegalArgumentException("New key must be smaller than previous key");
         }
         heap.get(i).setKey(newKey);
         while (i > 0 && compare(heap.get(parent(i)).getKey(), heap.get(i).getKey()) > 0) {
-            Entry<V, Key> temp = heap.get(i);
+            Entry temp = heap.get(i);
             heap.set(i, heap.get(parent(i)));
             indexOfValue.put(heap.get(parent(i)).getValue(), i);
             heap.set(parent(i), temp);
@@ -65,7 +65,7 @@ class Heap<V, Key> {
 
     public Set<V> values() {
         Set<V> values = new HashSet<V>();
-        for (Entry<V, Key> e : heap) values.add(e.getValue());
+        for (Entry e : heap) values.add(e.getValue());
         return values;
     }
 
@@ -94,7 +94,7 @@ class Heap<V, Key> {
         if (smallest == i) {
             return;
         }
-        Entry<V, Key> temp = heap.get(i);
+        Entry temp = heap.get(i);
         heap.set(i, heap.get(smallest));
         indexOfValue.put(heap.get(smallest).getValue(), i);
         heap.set(smallest, temp);
@@ -102,13 +102,14 @@ class Heap<V, Key> {
         heapify(smallest);
     }
 
-    private int compare(Key a, Key b) {
+    @SuppressWarnings("unchecked")
+	private int compare(K a, K b) {
         return comparator == null
-            ? ((Comparable<Key>) a).compareTo(b)
+            ? ((Comparable<K>) a).compareTo(b)
             : comparator.compare(a, b);
     }
 
-    class Entry<V, K> {
+    class Entry {
         private V value;
         private K key;
 

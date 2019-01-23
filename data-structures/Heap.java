@@ -14,10 +14,10 @@ import java.util.Set;
  * If a comparator is not provided, {@code Key} must implement
  * {@code Comparable<Key>}.
  */
-public class Heap<V, Key> {
-    private List<Entry<V, Key>> heap;
+public class Heap<V, K> {
+    private List<Entry> heap;
     private Map<V, Integer> indexOfValue;
-    private Comparator<Key> comparator;
+    private Comparator<K> comparator;
 
     /**
      * Initialize a heap using the key's default comparator.
@@ -32,7 +32,7 @@ public class Heap<V, Key> {
      * 
      * @param comparator the comparator function.
      */
-    public Heap(Comparator<Key> comparator) {
+    public Heap(Comparator<K> comparator) {
         this();
         this.comparator = comparator;
     }
@@ -72,11 +72,11 @@ public class Heap<V, Key> {
      * @param key   the priority of the element.
      * @throws IllegalArgumentException if the provided key is {@code null}
      */
-    public void add(V value, Key key) {
+    public void add(V value, K key) {
         if (containsValue(value) || key == null) {
             throw new IllegalArgumentException();
         }
-        heap.add(new Entry<>(value, key));
+        heap.add(new Entry(value, key));
         indexOfValue.put(value, heap.size() - 1);
         decreaseKey(value, key);
     }
@@ -91,7 +91,7 @@ public class Heap<V, Key> {
      * @throws NoSuchElementException   if the heap does not contain the provided
      *                                  value.
      */
-    public void decreaseKey(V value, Key newKey) {
+    public void decreaseKey(V value, K newKey) {
         if (!indexOfValue.containsKey(value)) {
             throw new NoSuchElementException();
         }
@@ -104,7 +104,7 @@ public class Heap<V, Key> {
         }
         heap.get(i).setKey(newKey);
         while (i > 0 && compare(heap.get(parent(i)).getKey(), heap.get(i).getKey()) > 0) {
-            Entry<V, Key> temp = heap.get(i);
+            Entry temp = heap.get(i);
             heap.set(i, heap.get(parent(i)));
             indexOfValue.put(heap.get(parent(i)).getValue(), i);
             heap.set(parent(i), temp);
@@ -152,7 +152,7 @@ public class Heap<V, Key> {
      */
     public Set<V> values() {
         Set<V> values = new HashSet<V>();
-        for (Entry<V, Key> e : heap) {
+        for (Entry e : heap) {
             values.add(e.getValue());
         }
         return values;
@@ -195,7 +195,7 @@ public class Heap<V, Key> {
         if (smallest == i) {
             return;
         }
-        Entry<V, Key> temp = heap.get(i);
+        Entry temp = heap.get(i);
         heap.set(i, heap.get(smallest));
         indexOfValue.put(heap.get(smallest).getValue(), i);
         heap.set(smallest, temp);
@@ -206,9 +206,10 @@ public class Heap<V, Key> {
     /**
      * Compares the input keys using the specified comparator, if specified.
      */
-    private int compare(Key a, Key b) {
+    @SuppressWarnings("unchecked")
+    private int compare(K a, K b) {
         if (comparator == null) {
-            return ((Comparable<Key>) a).compareTo(b);
+            return ((Comparable<K>) a).compareTo(b);
         }
         return comparator.compare(a, b);
     }
@@ -216,7 +217,7 @@ public class Heap<V, Key> {
     /**
      * A container that stores an element and its associated priority key.
      */
-    class Entry<V, K> {
+    class Entry {
         private V value;
         private K key;
 
