@@ -1,8 +1,7 @@
 # algorithms
 
-Various data structures and algorithms in Java. Most files contain a `main`
-method that gives a simple demonstration of the algorithm (and can be used to
-verify correctness (hopefully)).
+Various data structures and algorithms in Java. Ideally these should all be
+tested but that takes a lot of work so I really hope these just work.
 
 * `/algorithms`: miscellaneous algorithms
 * `/data-structures`: data structures

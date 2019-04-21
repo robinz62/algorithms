@@ -11,7 +11,7 @@ public class SegmentTree {
         n = arr.length;
         this.arr = new int[n * 2];
         for (int i = 0; i < n; i++) {
-            this.arr[i] = arr[n + i];
+            this.arr[n + i] = arr[i];
         }
         build();
     }
