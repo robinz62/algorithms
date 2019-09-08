@@ -43,6 +43,8 @@ public class SegmentTree {
      * @return the sum of the elements in the range [l, r).
      */
     public int query(int l, int r) {
+        l += n;
+        r += n;
         int sum = 0;
         while (l < r) {
             if ((l & 1) > 0) {

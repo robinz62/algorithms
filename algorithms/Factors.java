@@ -1,6 +1,6 @@
 import java.util.*;
 
-// TODO: this functions should be tested
+// TODO: these functions should be tested
 
 /**
  * Contains various basic algorithms related to integer factors.
@@ -16,12 +16,14 @@ public class Factors {
      */
     public List<Integer> factors(int n) {
         List<Integer> factors = new ArrayList<>();
-        for (int i = 1; i * i <= n; i++) {
+        int i = 1;
+        for (; i * i < n; i++) {
             if (n % i == 0) {
                 factors.add(i);
                 factors.add(n / i);
             }
         }
+        if (i * i == n) factors.add(i);
         return factors;
     }
 
