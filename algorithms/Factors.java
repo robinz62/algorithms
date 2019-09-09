@@ -37,10 +37,12 @@ public class Factors {
         Map<Integer, Integer> pFactors = new HashMap<>();
         while (n % 2 == 0) {
             pFactors.put(2, pFactors.getOrDefault(2, 0) + 1);
+            n /= 2;
         }
-        for (int i = 3; i * i < n; i += 2) {
+        for (int i = 3; i * i <= n; i += 2) {
             while (n % i == 0) {
                 pFactors.put(i, pFactors.getOrDefault(i, 0) + 1);
+                n /= i;
             }
         }
         if (n > 2) {
@@ -97,18 +99,15 @@ public class Factors {
      * @param n the upper limit of the sieve.
      * @return the smallest-prime array.
      */
-    public int[] smallestPrime(int n) {
-        int[] sp = new int[n + 1];
+    public void smallestPrime(int n) {
+        sp = new int[n + 1];
         for (int i = 2; i <= n; i += 2) sp[i] = 2;
-        for (int i = 3; i * i <= n; i += 2) {
-            if (sp[i] == i) {
-                for (int j = i * i; j <= n; j += i) {
-                    if (sp[j] != 0) break;
-                    if (sp[j] == 0) sp[j] = i;
-                }
-            }
-        }
-        return sp;
+        for (int i = 3; i <= n; i += 2) sp[i] = i;
+        for (int i = 3; i * i <= n; i += 2)
+            if (sp[i] == i)
+                for (int j = i * i; j <= n; j += i)
+                    if (sp[j] == j)
+                        sp[j] = i;
     }
 
     /**
