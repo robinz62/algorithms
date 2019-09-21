@@ -1,5 +1,7 @@
 import java.util.*;
 
+// TODO: mobius function, totient function
+
 /**
  * Contains various basic algorithms related to integer factors.
  */
@@ -138,6 +140,9 @@ public class Factors {
         return a / gcd(a, b) * b;
     }
 
+    /**
+     * Make sure everything works.
+     */
     public static void main(String[] args) {
         FactorsTest.run();
         System.out.println("DONE");
@@ -173,7 +178,11 @@ class FactorsTest {
         map.put(5, 2);
         primeFactorizeTest(300, map);
 
-
+        gcdTest(1, 1, 1);
+        gcdTest(1, 2, 1);
+        gcdTest(2, 8, 2);
+        gcdTest(12, 18, 6);
+        gcdTest(5, 5, 5);
     }
 
     static void factorsTest(int n, List<Integer> expected) {
@@ -197,6 +206,15 @@ class FactorsTest {
         actual = Factors.primeFactorize(n, sp);
         if (!actual.equals(expected)) {
             System.out.println("FAIL: primeFactorize(" + n + ", sp)");
+            System.out.println("  expected: " + expected);
+            System.out.println("  actual:   " + actual);
+        }
+    }
+
+    static void gcdTest(int n, int m, int expected) {
+        int actual = Factors.gcd(n, m);
+        if (actual != expected) {
+            System.out.println("FAIL: gcd(" + n + ", " + m + ")");
             System.out.println("  expected: " + expected);
             System.out.println("  actual:   " + actual);
         }
