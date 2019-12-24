@@ -108,12 +108,12 @@ public class LIS {
         return indices;
     }
 
-    public static <T> int[] lis(List<T> nums, Comparable<? super T> c) {
-        Integer[] dp = new Integer[nums.length];
-        int[] to = new int[nums.length];
+    public static <T> int[] lis(List<T> nums, Comparator<? super T> c) {
+        Integer[] dp = new Integer[nums.size()];
+        int[] to = new int[nums.size()];
         int len = 0;
 
-        for (int i = 0; i < nums.length; ++i) {
+        for (int i = 0; i < nums.size(); ++i) {
             int idx = Arrays.binarySearch(dp, 0, len, i,
                 (a, b) -> c.compare(nums.get(a), nums.get(b)));
             if (idx < 0) {
