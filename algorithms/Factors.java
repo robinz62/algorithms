@@ -8,12 +8,8 @@ import java.util.*;
 public class Factors {
 
     /**
-     * Returns a list containing the factors of the specified number in arbitrary order.
-     *
-     * O(sqrt(n))
-     * 
-     * @param n the number to find factors of.
-     * @return the list of factors.
+     * Returns a list containing the factors of the specified number (n) in
+     * arbitrary order. O(sqrt(n))
      */
     public static List<Integer> factors(int n) {
         List<Integer> factors = new ArrayList<>();
@@ -29,12 +25,8 @@ public class Factors {
     }
 
     /**
-     * Returns the prime factorization of the specified number as a map.
-     *
-     * O(sqrt(n))
-     * 
-     * @param n the number to prime-factorize.
-     * @return a map containing the prime factors and their counts.
+     * Returns the prime factorization of the specified number (n) as a map from
+     * prime factor to count. O(sqrt(n))
      */
     public static Map<Integer, Integer> primeFactorize(int n) {
         Map<Integer, Integer> factors = new HashMap<>();
@@ -55,15 +47,9 @@ public class Factors {
     }
 
     /**
-     * Returns the prime factorization of the specified number, using a
-     * precomputed smallest-prime array (sp, where sp[i] is the smallest prime
-     * factor of i).
-     *
-     * O(log n)
-     * 
-     * @param n the number to prime-factorize.
-     * @param sp the smallest-prime array
-     * @return a map containing the prime factors and their counts.
+     * Returns the prime factorization of the specified number (n) using a
+     * precomputed smallest-prime array (sp), where sp[i] is the smallest prime
+     * factor of i. sp must have size at least n + 1. O(log n)
      */
     public static Map<Integer, Integer> primeFactorize(int n, int[] sp) {
         Map<Integer, Integer> factors = new HashMap<>();
@@ -75,11 +61,8 @@ public class Factors {
     }
 
     /**
-     * Computes and returns an array prime, where prime[i] is true if i is
-     * prime and false otherwise (for i <= n). Implemented using linear sieve.
-     * 
-     * @param n the upper limit of the sieve.
-     * @return the prime array.
+     * Computes and returns an array prime, where prime[i] is true if i is prime and
+     * false otherwise (for i <= n). Implemented using linear sieve. O(n)
      */
     public static boolean[] sieve(int n) {
         List<Integer> primes = new ArrayList<>();
@@ -98,20 +81,20 @@ public class Factors {
     }
 
     /**
-     * Computes and returns an array sp, where sp[i] is the smallest prime
-     * factor of i (for 2 <= i <= n). Implemented using sieve of eratosthenes.
-     * 
-     * @param n the upper limit of the sieve.
-     * @return the smallest-prime array.
+     * Computes and returns an array sp, where sp[i] is the smallest prime factor of
+     * i (for 2 <= i <= n). Implemented using sieve of eratosthenes. O(n loglog(n))
      */
     public static int[] smallestPrime(int n) {
         int[] sp = new int[n + 1];
-        for (int i = 0; i <= n; i++) sp[i] = i;
-        for (int i = 4; i <= n; i += 2) sp[i] = 2;
+        for (int i = 0; i <= n; i++)
+            sp[i] = i;
+        for (int i = 4; i <= n; i += 2)
+            sp[i] = 2;
         for (int i = 3; i * i <= n; i += 2) {
             if (sp[i] == i) {
                 for (int j = i * i; j <= n; j += i) {
-                    if (sp[j] == j) sp[j] = i;
+                    if (sp[j] == j)
+                        sp[j] = i;
                 }
             }
         }
@@ -119,22 +102,14 @@ public class Factors {
     }
 
     /**
-     * Returns the greatest common denominator of the specified numbers.
-     * 
-     * @param a the first number.
-     * @param b the second number.
-     * @return the greatest common denominator.
+     * Returns the greatest common denominator of the specified numbers (a) and (b).
      */
     public static int gcd(int a, int b) {
         return a == 0 ? b : gcd(b % a, a);
     }
 
     /**
-     * Returns the least common multiple of the specified numbers.
-     * 
-     * @param a the first number.
-     * @param b the second number.
-     * @return the least common multiple.
+     * Returns the least common multiple of the specified numbers (a) and (b).
      */
     public static int lcm(int a, int b) {
         return a / gcd(a, b) * b;
