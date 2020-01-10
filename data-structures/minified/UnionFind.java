@@ -1,10 +1,10 @@
 import java.util.*;
 
 class UnionFind {
-    private int n;
-    private int numComponents;
-    private int[] parent;
-    private int[] rank;
+    int n;
+    int numComponents;
+    int[] parent;
+    int[] rank;
 
     public UnionFind(int n) {
         this.n = numComponents = n;
@@ -13,7 +13,7 @@ class UnionFind {
         for (int i = 0; i < n; i++) parent[i] = i;
     }
 
-    public void union(int u, int v) {
+    void union(int u, int v) {
         int x = find(u);
         int y = find(v);
         if (x == y) return;
@@ -26,7 +26,7 @@ class UnionFind {
         numComponents--;
     }
 
-    public int find(int u) {
+    int find(int u) {
         int current = u;
         List<Integer> toUpdate = new ArrayList<>();
         while (parent[current] != current) {
@@ -37,7 +37,7 @@ class UnionFind {
         return current;
     }
 
-    public int getNumComponents() {
+    int getNumComponents() {
         return numComponents;
     }
 }

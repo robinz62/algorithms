@@ -1,6 +1,6 @@
-public class SegmentTree {
-    private int n;
-    private int[] arr;
+class SegmentTree {
+    int n;
+    int[] arr;
 
     public SegmentTree(int[] arr) {
         n = arr.length;
@@ -11,20 +11,20 @@ public class SegmentTree {
         build();
     }
 
-    private void build() {
+    void build() {
         for (int i = n - 1; i > 0; i--) {
             arr[i] = arr[i * 2] + arr[i * 2 + 1];
         }
     }
 
-    public void modify(int i, int value) {
+    void modify(int i, int value) {
         arr[n + i] = value;
         for (i = (n + i) / 2; i > 0; i /= 2) {
             arr[i] = arr[i * 2] + arr[i * 2 + 1];
         }
     }
 
-    public int query(int l, int r) {
+    int query(int l, int r) {
         l += n;
         r += n;
         int sum = 0;

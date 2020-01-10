@@ -1,9 +1,9 @@
 import java.util.*;
 
 class Heap<V, K> {
-    private List<Entry> heap;
-    private Map<V, Integer> indexOfValue;
-    private Comparator<K> comparator;
+    List<Entry> heap;
+    Map<V, Integer> indexOfValue;
+    Comparator<K> comparator;
 
     public Heap() {
         heap = new ArrayList<>();
@@ -15,25 +15,25 @@ class Heap<V, K> {
         this.comparator = comparator;
     }
 
-    public int size() {
+    int size() {
         return heap.size();
     }
 
-    public boolean isEmpty() {
+    boolean isEmpty() {
         return heap.isEmpty();
     }
 
-    public boolean containsValue(V value) {
+    boolean containsValue(V value) {
         return indexOfValue.containsKey(value);
     }
 
-    public void add(V value, K key) {
+    void add(V value, K key) {
         heap.add(new Entry(value, key));
         indexOfValue.put(value, heap.size() - 1);
         decreaseKey(value, key);
     }
 
-    public void decreaseKey(V value, K newKey) {
+    void decreaseKey(V value, K newKey) {
         int i = indexOfValue.get(value);
         heap.get(i).setKey(newKey);
         while (i > 0 && compare(heap.get(parent(i)).getKey(), heap.get(i).getKey()) > 0) {
@@ -46,11 +46,11 @@ class Heap<V, K> {
         }
     }
 
-    public V peek() {
+    V peek() {
         return heap.get(0).getValue();
     }
 
-    public V extractMin() {
+    V extractMin() {
         V min = heap.get(0).getValue();
         heap.set(0, heap.get(heap.size() - 1));
         indexOfValue.put(heap.get(0).getValue(), 0);
@@ -60,25 +60,25 @@ class Heap<V, K> {
         return min;
     }
 
-    public Set<V> values() {
+    Set<V> values() {
         Set<V> values = new HashSet<V>();
         for (Entry e : heap) values.add(e.getValue());
         return values;
     }
 
-    private int parent(int index) {
+    int parent(int index) {
         return index == 0 ? 0 : (index - 1) >> 1;
     }
 
-    private int left(int index) {
+    int left(int index) {
         return (index << 1) + 1;
     }
 
-    private int right(int index) {
+    int right(int index) {
         return (index << 1) + 2;
     }
 
-    private void heapify(int i) {
+    void heapify(int i) {
         int l = left(i);
         int r = right(i);
         int smallest = i;
@@ -100,30 +100,30 @@ class Heap<V, K> {
     }
 
     @SuppressWarnings("unchecked")
-	private int compare(K a, K b) {
+	int compare(K a, K b) {
         return comparator == null
             ? ((Comparable<K>) a).compareTo(b)
             : comparator.compare(a, b);
     }
 
     class Entry {
-        private V value;
-        private K key;
+        V value;
+        K key;
 
         public Entry(V v, K k) {
             value = v;
             key = k;
         }
 
-        public V getValue() {
+        V getValue() {
             return value;
         }
 
-        public K getKey() {
+        K getKey() {
             return key;
         }
 
-        public K setKey(K k) {
+        K setKey(K k) {
             K old = key;
             key = k;
             return old;
