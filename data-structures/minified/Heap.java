@@ -35,9 +35,6 @@ class Heap<V, K> {
 
     public void decreaseKey(V value, K newKey) {
         int i = indexOfValue.get(value);
-        if (compare(newKey, heap.get(i).getKey()) > 0) {
-            throw new IllegalArgumentException("New key must be smaller than previous key");
-        }
         heap.get(i).setKey(newKey);
         while (i > 0 && compare(heap.get(parent(i)).getKey(), heap.get(i).getKey()) > 0) {
             Entry temp = heap.get(i);

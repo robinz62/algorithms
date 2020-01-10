@@ -9,7 +9,8 @@ import java.util.Set;
 
 /**
  * A binary heap that supports generic values and priorities. As this heap
- * supports decrease-key, the values must be unique.
+ * supports decrease-key, the values must be unique (based on the Objects'
+ * equals method.
  * <p>
  * If a comparator is not provided, {@code Key} must implement
  * {@code Comparable<Key>}.
