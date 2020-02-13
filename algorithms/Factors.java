@@ -102,17 +102,32 @@ public class Factors {
     }
 
     /**
-     * Returns the greatest common denominator of the specified numbers (a) and (b).
+     * Returns the greatest common denominator of the specified numbers (a) and (b). O(log n).
      */
     public static int gcd(int a, int b) {
         return a == 0 ? b : gcd(b % a, a);
     }
 
     /**
-     * Returns the least common multiple of the specified numbers (a) and (b).
+     * Returns the least common multiple of the specified numbers (a) and (b). O(log n).
      */
     public static int lcm(int a, int b) {
         return a / gcd(a, b) * b;
+    }
+
+    /**
+     * Returns Euler's totient function of the input number. O(sqrt(n)).
+     */
+    public static int phi(int n) {
+        int result = n;
+        for (int i = 2; i * i <= n; i++) {
+            if (n % i == 0) {
+                while (n % i == 0) n /= i;
+                result -= result / i;
+            }
+        }
+        if (n > 1) result -= result / n;
+        return result;
     }
 
     /**
