@@ -67,6 +67,20 @@ public class Heap<V, K> {
     }
 
     /**
+     * Returns the key corresponding to the specified value, or {@code null},
+     * if the value doesn't exist.
+     *
+     * @return the key of the value.
+     */
+    public K getKey(V value) {
+        Integer idx = indexOfValue.get(value);
+        if (idx == null) {
+            return null;
+        }
+        return heap.get(indexOfValue.get(value)).getKey();
+    }
+
+    /**
      * Adds the specified element to the heap with the specified priority.
      * 
      * @param value the element to add to the heap.

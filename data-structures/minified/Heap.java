@@ -27,6 +27,10 @@ class Heap<V, K> {
         return indexOfValue.containsKey(value);
     }
 
+    K getKey(V value) {
+        return heap.get(indexOfValue.get(value)).getKey();
+    }
+
     void add(V value, K key) {
         heap.add(new Entry(value, key));
         indexOfValue.put(value, heap.size() - 1);
