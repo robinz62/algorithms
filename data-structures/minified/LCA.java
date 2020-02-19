@@ -1,7 +1,6 @@
 import java.util.*;
 
 public class LCA {
-
     int n;
     int[] first;
     int[] depth;
@@ -17,7 +16,7 @@ public class LCA {
         build(euler);
     }
 
-    public int lca(int u, int v) {
+    int lca(int u, int v) {
         int l = first[u];
         int r = first[v];
         if (l > r) {
