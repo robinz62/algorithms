@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class LCA {
+class LCA {
     int n;
     int[] first;
     int[] depth;
