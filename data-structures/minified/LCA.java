@@ -2,10 +2,10 @@ import java.util.*;
 
 public class LCA {
 
-    private int n;
-    private int[] first;
-    private int[] depth;
-    private int[] st;
+    int n;
+    int[] first;
+    int[] depth;
+    int[] st;
 
     public LCA(List<List<Integer>> adj, int root) {
         n = adj.size();
