@@ -5,7 +5,7 @@
  * This implementation uses 64 bit integers internally for data and operations.
  * Hence, the product of any numerator/denominator should be < 2^63-1.
  */
-class Fraction implements Comparable<Fraction> {
+public class Fraction implements Comparable<Fraction> {
     private final long n;
     private final long d;
 
