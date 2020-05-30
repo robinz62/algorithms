@@ -11,7 +11,7 @@ class LCA {
         first = new int[n];
         depth = new int[n];
         boolean[] visited = new boolean[n];
-        List<Integer> euler = new ArrayList<>();
+        List<Integer> euler = new ArrayList<>(2 * n);
         dfs(adj, root, visited, euler, 0);
         build(euler);
     }
@@ -45,9 +45,9 @@ class LCA {
     private void dfs(List<List<Integer>> adj, int u, boolean[] visited,
             List<Integer> euler, int currDepth) {
         visited[u] = true;
-        euler.add(u);
         depth[u] = currDepth;
         first[u] = euler.size() - 1;
+        euler.add(u);
         for (int v : adj.get(u)) {
             if (!visited[v]) {
                 dfs(adj, v, visited, euler, currDepth + 1);
