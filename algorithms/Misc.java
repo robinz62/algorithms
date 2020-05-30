@@ -1,8 +1,8 @@
 public class Misc {
 
     /**
-     * Performs binary search for k in sorted array A in the half-open range
-     * [l, r). If k is found, then the index of the leftmost occurrence is
+     * Performs binary search for k in sorted array A in the closed range
+     * [l, r]. If k is found, then the index of the leftmost occurrence is
      * returned. Otherwise, returns (-ins - 1), where ins is where k would be
      * inserted into the array. O(log n).
      */
@@ -24,8 +24,8 @@ public class Misc {
     }
 
     /**
-     * Performs binary search for k in sorted array A in the half-open range
-     * [l, r). If k is found, then the index of the rightmost occurrence is
+     * Performs binary search for k in sorted array A in the closed range
+     * [l, r]. If k is found, then the index of the rightmost occurrence is
      * returned. Otherwise, returns (-ins - 1), where ins is where k would be
      * inserted into the array. O(log n).
      */
