@@ -7,5 +7,5 @@ tested but that takes a lot of work so I really hope these just work.
 * `/data-structures`:
   * `/documented`: data structures with good style and documentation.
   * `/minified`: data structures with competitive programming-style syntax,
-    mostly for reduced code length among other things e.g. no privacy modifiers
-    for quicker debugging and on-the-fly modifications/additions.
+    featuring no documentation, shorter code, public instance variables for
+    easier debugging.

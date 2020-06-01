@@ -1,0 +1,13 @@
+iterative segment tree
+fenwick tree
+order-statistic tree?
+custom linked list implementation with access to nodes
+
+quick select
+list permutations
+next permutation
+
+floyd-warshall
+ford-fulkerson
+
+manacher's algorithm
