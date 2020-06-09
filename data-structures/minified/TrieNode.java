@@ -6,7 +6,7 @@ class TrieNode {
         for (int i = 0; i < word.length(); i++) {
             int c = word.charAt(i) - 'a';
             if (root.children == null) root.children = new TrieNode[26];
-            if (root.children[c] == null) root.children[c] = new Node();
+            if (root.children[c] == null) root.children[c] = new TrieNode();
             root = root.children[c];
         }
         root.isWord = true;
