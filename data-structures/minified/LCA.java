@@ -6,7 +6,7 @@ class LCA {
     int[] depth;
     int[] st;
 
-    public LCA(List<List<Integer>> adj, int root) {
+    LCA(List<List<Integer>> adj, int root) {
         n = adj.size();
         first = new int[n];
         depth = new int[n];

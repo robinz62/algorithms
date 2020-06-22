@@ -1,7 +1,7 @@
 class Fraction implements Comparable<Fraction> {
     long n;
     long d;
-    public Fraction(long n, long d) {
+    Fraction(long n, long d) {
         if (n == 0) {
             this.d = 1;
             return;

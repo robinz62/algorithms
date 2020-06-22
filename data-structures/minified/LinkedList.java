@@ -124,7 +124,7 @@ class ListNode {
     int val;
     ListNode prev;
     ListNode next;
-    public ListNode(int v) { 
+    ListNode(int v) { 
         val = v;
     }
 }

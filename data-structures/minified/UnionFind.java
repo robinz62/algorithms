@@ -6,7 +6,7 @@ class UnionFind {
     int[] parent;
     int[] rank;
 
-    public UnionFind(int n) {
+    UnionFind(int n) {
         this.n = numComponents = n;
         parent = new int[n];
         rank = new int[n];

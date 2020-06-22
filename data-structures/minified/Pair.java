@@ -1,7 +1,7 @@
 class Pair {
     int fst;
     int snd;
-    public Pair(int f, int s) {
+    Pair(int f, int s) {
         fst = f;
         snd = s;
     }
@@ -19,7 +19,7 @@ import java.util.Objects;
 class Pair<S, T> {
     S fst;
     T snd;
-    public Pair(S f, T s) {
+    Pair(S f, T s) {
         fst = f;
         snd = s;
     }

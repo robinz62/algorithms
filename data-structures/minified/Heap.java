@@ -5,8 +5,8 @@ class Heap<V, K> {
     Map<V, Integer> indexOfValue = new HashMap<>();
     Comparator<K> comparator;
 
-    public Heap() {}
-    public Heap(Comparator<K> comparator) {
+    Heap() {}
+    Heap(Comparator<K> comparator) {
         this.comparator = comparator;
     }
 
