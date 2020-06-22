@@ -25,6 +25,7 @@ class SegmentTree {
         }
     }
 
+    // Note: input range is half-open [l, r)
     int query(int l, int r) {
         l += n;
         r += n;
