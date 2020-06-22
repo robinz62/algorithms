@@ -3,7 +3,9 @@ class BIT {
     int[] arr;
     BIT(int[] arr) {
         this.arr = new int[arr.length + 1];
-        System.arraycopy(arr, 0, this.arr, 1, arr.length);
+        for (int i = 0; i < arr.length; i++) {
+            add(i, arr[i]);
+        }
     }
 
     // Queries the closed range [0, i]
