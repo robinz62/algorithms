@@ -1,27 +1,27 @@
 // For range sum query.
 class SegmentTree {
     int n;
-    int[] arr;
+    int[] st;
 
     SegmentTree(int[] arr) {
         n = arr.length;
-        this.arr = new int[n*2];
+        st = new int[n*2];
         for (int i = 0; i < n; i++) {
-            this.arr[n + i] = arr[i];
+            st[n + i] = arr[i];
         }
         build();
     }
 
     void build() {
         for (int i = n - 1; i > 0; i--) {
-            arr[i] = arr[i*2] + arr[i*2+1];
+            st[i] = st[i*2] + st[i*2+1];
         }
     }
 
     void modify(int i, int value) {
-        arr[n + i] = value;
+        st[n + i] = value;
         for (i = (n + i) / 2; i > 0; i /= 2) {
-            arr[i] = arr[i*2] + arr[i*2+1];
+            st[i] = st[i*2] + st[i*2+1];
         }
     }
 
@@ -32,10 +32,10 @@ class SegmentTree {
         int sum = 0;
         while (l < r) {
             if ((l & 1) > 0) {
-                sum += arr[l++];
+                sum += st[l++];
             }
             if ((r & 1) > 0) {
-                sum += arr[--r];
+                sum += st[--r];
             }
             l /= 2;
             r /= 2;
@@ -47,40 +47,40 @@ class SegmentTree {
 // For range min query.
 class SegmentTree {
     int n;
-    int[] arr;
+    int[] st;
 
     SegmentTree(int[] arr) {
         n = arr.length;
-        this.arr = new int[n*2];
+        st = new int[n*2];
         for (int i = 0; i < n; i++) {
-            this.arr[n + i] = arr[i];
+            st[n + i] = arr[i];
         }
         build();
     }
 
     void build() {
         for (int i = n - 1; i > 0; i--) {
-            arr[i] = Math.min(arr[i*2], arr[i*2+1]);
+            st[i] = Math.min(st[i*2], st[i*2+1]);
         }
     }
 
     void modify(int i, int value) {
-        arr[n + i] = value;
+        st[n + i] = value;
         for (i = (n + i) / 2; i > 0; i /= 2) {
-            arr[i] = Math.min(arr[i*2], arr[i*2+1]);
+            asti] = Math.min(st[i*2], st[i*2+1]);
         }
     }
 
     int query(int l, int r) {
         l += n;
         r += n;
-        int min = arr[l];
+        int min = st[l];
         while (l < r) {
             if ((l & 1) > 0) {
-                min = Math.min(min, arr[l++]);
+                min = Math.min(min, st[l++]);
             }
             if ((r & 1) > 0) {
-                min = Math.min(min, arr[--r]);
+                min = Math.min(min, st[--r]);
             }
             l /= 2;
             r /= 2;
@@ -92,40 +92,40 @@ class SegmentTree {
 // For range max query.
 class SegmentTree {
     int n;
-    int[] arr;
+    int[] st;
 
     SegmentTree(int[] arr) {
         n = arr.length;
-        this.arr = new int[n*2];
+        st = new int[n*2];
         for (int i = 0; i < n; i++) {
-            this.arr[n + i] = arr[i];
+            st[n + i] = arr[i];
         }
         build();
     }
 
     void build() {
         for (int i = n - 1; i > 0; i--) {
-            arr[i] = Math.max(arr[i*2], arr[i*2+1]);
+            st[i] = Math.max(st[i*2], st[i*2+1]);
         }
     }
 
     void modify(int i, int value) {
-        arr[n + i] = value;
+        st[n + i] = value;
         for (i = (n + i) / 2; i > 0; i /= 2) {
-            arr[i] = Math.max(arr[i*2], arr[i*2+1]);
+            st[i] = Math.max(st[i*2], st[i*2+1]);
         }
     }
 
     int query(int l, int r) {
         l += n;
         r += n;
-        int max = arr[l];
+        int max = st[l];
         while (l < r) {
             if ((l & 1) > 0) {
-                max = Math.max(max, arr[l++]);
+                max = Math.max(max, st[l++]);
             }
             if ((r & 1) > 0) {
-                max = Math.max(max, arr[--r]);
+                max = Math.max(max, st[--r]);
             }
             l /= 2;
             r /= 2;
