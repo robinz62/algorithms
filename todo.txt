@@ -1,13 +1,15 @@
-iterative segment tree
-fenwick tree
-order-statistic tree?
-custom linked list implementation with access to nodes
+advanced seg trees
+order-statistic tree
+test the linked list
 
 quick select
-list permutations
-next permutation
+misc > next permutation
 
-floyd-warshall
-ford-fulkerson
+graphs > floyd-warshall
+graphs > ford-fulkerson
 
 manacher's algorithm
+
+euler circuit
+
+deprecate documented data structures
