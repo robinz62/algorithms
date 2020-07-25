@@ -1,5 +1,9 @@
 import java.util.*;
 
+/**
+ * DSU featuring union-by-rank and path compression.
+ * Nodes are labeled [0, n-1].
+ */
 class UnionFind {
     int n;
     int numComponents;

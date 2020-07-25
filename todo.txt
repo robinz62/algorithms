@@ -1,6 +1,9 @@
-advanced seg trees
+recursive seg tree that supports root->leaf pathing (4n)
+lazy propagation seg tree
+persistent seg tree
 order-statistic tree
 test the linked list
+sparse table
 
 quick select
 misc > next permutation

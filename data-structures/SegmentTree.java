@@ -1,3 +1,8 @@
+/**
+ * Compact segment tree (2n space) based on
+ * http://codeforces.com/blog/entry/18051. Doesn't allow more complicated
+ * behavior like traversing from root.
+ */
 class SegmentTree {
     int n;
     int[] st;

@@ -1,5 +1,12 @@
 import java.util.*;
 
+/**
+ * A binary heap that supports generic values and priorities. As this heap
+ * supports decrease-key, the values must be unique (based on the V's equals
+ * method).
+ *
+ * If a comparator is not provided, K must implement Comparable<K>.
+ */
 class Heap<V, K> {
     List<Entry> heap = new ArrayList<>();
     Map<V, Integer> indexOfValue = new HashMap<>();

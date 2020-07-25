@@ -1,6 +1,8 @@
 import java.util.*;
 
-// Segment tree-based LCA.
+/**
+ * Segment tree-based LCA. O(n) preprocess, O(log n) query.
+ */
 class LCA {
     int n;
     int[] first;
@@ -68,7 +70,9 @@ class LCA {
     }
 }
 
-// Binary lifting-based LCA
+/**
+ * Binary lifting-based LCA. O(n log n) preprocess, O(log n) query.
+ */
 class LCA {
     int time = 0;
     int[] s;

@@ -61,26 +61,6 @@ public class Factors {
     }
 
     /**
-     * Computes and returns an array prime, where prime[i] is true if i is prime and
-     * false otherwise (for i <= n). Implemented using linear sieve. O(n)
-     */
-    public static boolean[] sieve(int n) {
-        List<Integer> primes = new ArrayList<>();
-        boolean[] prime = new boolean[n + 1];
-        Arrays.fill(prime, true);
-        for (int i = 2; i <= n; i++) {
-            if (prime[i]) {
-                primes.add(i);
-                for (int j = 0; j < primes.size() && i * primes.get(j) <= n; j++) {
-                    prime[i * primes.get(j)] = false;
-                    if (i % primes.get(j) == 0) break;
-                }
-            }
-        }
-        return prime;
-    }
-
-    /**
      * Computes and returns an array sp, where sp[i] is the smallest prime factor of
      * i (for 2 <= i <= n). Implemented using sieve of eratosthenes. O(n loglog(n))
      */
@@ -99,6 +79,26 @@ public class Factors {
             }
         }
         return sp;
+    }
+
+    /**
+     * Computes and returns an array prime, where prime[i] is true if i is prime and
+     * false otherwise (for i <= n). Implemented using linear sieve. O(n)
+     */
+    public static boolean[] sieve(int n) {
+        List<Integer> primes = new ArrayList<>();
+        boolean[] prime = new boolean[n + 1];
+        Arrays.fill(prime, true);
+        for (int i = 2; i <= n; i++) {
+            if (prime[i]) {
+                primes.add(i);
+                for (int j = 0; j < primes.size() && i * primes.get(j) <= n; j++) {
+                    prime[i * primes.get(j)] = false;
+                    if (i % primes.get(j) == 0) break;
+                }
+            }
+        }
+        return prime;
     }
 
     /**
