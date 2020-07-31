@@ -45,4 +45,18 @@ public class Misc {
         }
         return upper >= 0 ? upper : -l - 1;
     }
+
+    /**
+     * Code snippet for looping through submasks in descending order. Total of
+     * 2^n submasks for a mask with cardinality n.
+     * 
+     * Tip: iterating through all submasks of all subsets is O(3^n).
+     */
+    public static void enumerateSubmasks(int mask) {
+        int s = mask;
+        while (s > 0) {
+            // use s here
+            s = (s-1) & mask;
+        }
+    }
 }
