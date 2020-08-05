@@ -1,5 +1,3 @@
-recursive seg tree that supports root->leaf pathing (4n)
-lazy propagation seg tree
 persistent seg tree
 order-statistic tree
 test the linked list
@@ -14,5 +12,3 @@ graphs > ford-fulkerson
 manacher's algorithm
 
 euler circuit
-
-deprecate documented data structures
