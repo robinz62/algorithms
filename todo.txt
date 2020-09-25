@@ -9,6 +9,4 @@ misc > next permutation
 graphs > floyd-warshall
 graphs > ford-fulkerson
 
-manacher's algorithm
-
 euler circuit

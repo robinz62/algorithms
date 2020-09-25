@@ -59,4 +59,47 @@ public class Misc {
             s = (s-1) & mask;
         }
     }
+
+    /**
+     * Manacher's algorithm for finding all palindromic substrings of a string.
+     * Returns the length of the longest palindromic substring.
+     * 
+     * d1[i] stores odd-length palindromes. d2[i] stores even-length
+     * palindromes. For d1, i is the center of the palindrome, and the length of
+     * the palindrome is d1[i]*2 - 1. For d2, i is the right-center of the
+     * palindrome, and the length of the palindrome is d2[i]*2.
+     */
+    public static int manacher(String str) {
+        char[] s = str.toCharArray();
+        int n = s.length;
+        int[] d1 = new int[n];
+        for (int i = 0, l = 0, r = -1; i < n; i++) {
+            int k = (i > r) ? 1 : Math.min(d1[l + r - i], r - i + 1);
+            while (0 <= i - k && i + k < n && s[i - k] == s[i + k]) {
+                k++;
+            }
+            d1[i] = k--;
+            if (i + k > r) {
+                l = i - k;
+                r = i + k;
+            }
+        }
+        int[] d2 = new int[n];
+        for (int i = 0, l = 0, r = -1; i < n; i++) {
+            int k = (i > r) ? 0 : Math.min(d2[l + r - i + 1], r - i + 1);
+            while (0 <= i - k - 1 && i + k < n && s[i - k - 1] == s[i + k]) {
+                k++;
+            }
+            d2[i] = k--;
+            if (i + k > r) {
+                l = i - k - 1;
+                r = i + k ;
+            }
+        }
+
+        int ans = 0;
+        for (int di : d1) ans = Math.max(ans, di * 2 - 1);
+        for (int di : d2) ans = Math.max(ans, di * 2);
+        return ans;
+    }
 }
