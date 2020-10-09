@@ -12,9 +12,8 @@ class LinkedList {
     ListNode getLast() { return tail; }
     int size() { return size; }
 
-    ListNode addFirst(int val) {
+    ListNode addFirst(ListNode node) {
         size++;
-        ListNode node = new ListNode(val);
         if (head == null) return head = tail = node;
         head.prev = node;
         node.next = head;
@@ -22,9 +21,8 @@ class LinkedList {
         return node;
     }
 
-    ListNode addLast(int val) {
+    ListNode addLast(ListNode node) {
         size++;
-        ListNode node = new ListNode(val);
         if (head == null) return head = tail = node;
         tail.next = node;
         node.prev = tail;
@@ -92,13 +90,12 @@ class LinkedList {
         return val;
     }
 
-    int delete(ListNode node) {
+    void delete(ListNode node) {
         if (node == head) return removeFirst();
         if (node == tail) return removeLast();
         size--;
         node.prev.next = node.next;
         node.next.prev = node.prev;
-        return node.val;
     }
 
     void swapLeft(ListNode node) {
