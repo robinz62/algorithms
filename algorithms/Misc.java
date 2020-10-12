@@ -48,7 +48,7 @@ public class Misc {
 
     /**
      * Code snippet for looping through submasks in descending order. Total of
-     * 2^n submasks for a mask with cardinality n.
+     * 2^n submasks for a mask with cardinality n. Note 0 is not processed.
      * 
      * Tip: iterating through all submasks of all subsets is O(3^n).
      */
