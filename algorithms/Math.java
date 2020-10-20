@@ -90,12 +90,10 @@ public class Factors {
         boolean[] prime = new boolean[n + 1];
         Arrays.fill(prime, true);
         for (int i = 2; i <= n; i++) {
-            if (prime[i]) {
-                primes.add(i);
-                for (int j = 0; j < primes.size() && i * primes.get(j) <= n; j++) {
-                    prime[i * primes.get(j)] = false;
-                    if (i % primes.get(j) == 0) break;
-                }
+            if (prime[i]) primes.add(i);
+            for (int j = 0; j < primes.size() && i * primes.get(j) <= n; j++) {
+                prime[i * primes.get(j)] = false;
+                if (i % primes.get(j) == 0) break;
             }
         }
         return prime;
