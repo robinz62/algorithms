@@ -1,6 +1,5 @@
 persistent seg tree
 order-statistic tree
-test the linked list
 sparse table
 
 quick select
@@ -8,5 +7,12 @@ misc > next permutation
 
 graphs > floyd-warshall
 graphs > ford-fulkerson
+graphs > SCC
+
+matrix multiplication, matrix exp.
+gaussian elimination
+maybe code snippet specifically for xor elimination
+
+string hashing
 
 euler circuit
