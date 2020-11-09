@@ -131,10 +131,10 @@ class SegmentTree {
     int[] lazy;
 
     // Adjust identity, combine, and lazyFunction together to suit needs.
-    // Default code below is range sum query with range addition.
+    // Default code below is range minimum query with range addition.
     int identity = 0;
     int combine(int a, int b) {
-        return a + b;
+        return Math.min(a, b);
     }
     int lazyFunction(int currVal, int lazyVal) {
         return currVal + lazyVal;
@@ -166,6 +166,7 @@ class SegmentTree {
         lazy[2*v+1] = lazyFunction(lazy[2*v+1], lazy[v]);
         hasLazy[2*v] = hasLazy[2*v+1] = true;
         hasLazy[v] = false;
+        lazy[v] = 0;
     }
 
     void modify(int l, int r, int value) {
