@@ -1,4 +1,19 @@
 public class Misc {
+    
+    /**
+     * Sorts the input array, shuffling it first to counteract adversarial
+     * inputs.
+     */
+    void sort(int[] A) {
+        Random r = new Random();
+        for (int i = A.length-1; i > 0; i--) {
+            int j = r.nextInt(i+1);
+            int temp = A[i];
+            A[i] = A[j];
+            A[j] = temp;
+        }
+        Arrays.sort(A);
+    }
 
     /**
      * Performs binary search for k in sorted array A in the closed range
@@ -58,6 +73,34 @@ public class Misc {
             // use s here
             s = (s-1) & mask;
         }
+    }
+
+    /**
+     * Code snippet for looping over all submasks with k set bits. Subsets are
+     * generated in increasing order. Note that if longs are used, be sure to
+     * replace 1 with 1l in shift operations.
+     */
+    public static void enumerateSubsetsSizeK(int n, int k) {
+        int mask = (1 << k) - 1, r, c;
+        while (mask <= (1 << n) - (1 << (n-k))) {
+            // use mask here
+            c = mask & -mask, r = mask+c, mask = r | (((r ^ mask) >> 2) / c);
+        }
+    }
+
+    /**
+     * Code snippet to coordinate-compress the input array. Remove the last line
+     * if you don't want to modify the input array in place.
+     */
+    public static void coordinateCompress(int[] a) {
+        int[] b = new int[a.length];
+        System.arraycopy(a, 0, b, 0, a.length);
+        sort(b);
+        Map<Integer, Integer> map = new HashMap<>();
+        int idx = 0;
+        map.put(b[0], idx++);
+        for (int i = 1; i < b.length; i++) if (b[i] != b[i-1]) map.put(b[i], idx++);
+        for (int i = 0; i < n; i++) a[i] = map.get(a[i]);
     }
 
     /**
