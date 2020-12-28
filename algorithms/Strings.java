@@ -104,8 +104,14 @@ public class Strings {
 
     // String hash with much lower collision probability. Prefer this version.
     long strongStringHash(int[] s, int p) {
-        int m1 = 1_000_000_007;
-        int m2 = 1_000_000_009;
+        List<Long> primes = Arrays.asList(
+            999999751l, 999999757l, 999999761l, 999999797l, 999999883l,
+            999999893l, 999999929l, 999999937l, 1000000007l, 1000000009l,
+            1000000021l, 1000000033l, 1000000087l, 1000000093l, 1000000097l
+        );
+        Collections.shuffle(primes);
+        long m1 = primes.get(0);
+        long m2 = primes.get(1);
         long val1 = 0;
         long val2 = 0;
         long ppow1 = 1;
