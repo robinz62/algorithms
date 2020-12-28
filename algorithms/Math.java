@@ -3,7 +3,7 @@ import java.util.*;
 // TODO: mobius function, totient function seive
 
 // Contains assorted math-related algorithms.
-public class Factors {
+public class Math {
 
     // Returns a list containing the factors of the specified number (n) in
     // arbitrary order. O(sqrt(n))

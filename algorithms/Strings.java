@@ -91,13 +91,31 @@ public class Strings {
     // inputs using a->1, b->2, etc. or 0->1, 1->2, 2->3, etc.
     //
     // This code snippet can also be easily adapted for rolling hashes. Update
-    // windows of size k by val = val - s[i-k] + p^k-1 * s[i].
-    void stringHash(int[] s, int p, int m) {
+    // windows of size k by val = (val - s[i-k]) * p^-1 + p^k-1 * s[i].
+    int stringHash(int[] s, int p, int m) {
         long val = 0;
         long ppow = 1;
         for (int i = 0; i < s.length; i++) {
             val = (val + ppow * s[i]) % m;
+            ppow = ppow * p % m;
         }
         return (int) val;
+    }
+
+    // String hash with much lower collision probability. Prefer this version.
+    long strongStringHash(int[] s, int p) {
+        int m1 = 1_000_000_007;
+        int m2 = 1_000_000_009;
+        long val1 = 0;
+        long val2 = 0;
+        long ppow1 = 1;
+        long ppow2 = 1;
+        for (int i = 0; i < s.length; i++) {
+            val1 = (val1 + ppow1 * s[i]) % m1;
+            val2 = (val2 + ppow2 * s[i]) % m2;
+            ppow1 = ppow1 * p % m1;
+            ppow2 = ppow2 * p % m2;
+        }
+        return val1 * m2 + val2;
     }
 }
