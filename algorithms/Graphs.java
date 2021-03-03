@@ -43,4 +43,47 @@ public class Graphs {
             }
         }
     }
+
+    /**
+     * Finds bridges of a graph.
+     */
+    class Bridges {
+        int time;
+        int n;
+        List<List<Integer>> adj;
+        boolean[] visited;
+        int[] s;
+        int[] low;
+
+        void dfs(int u, int p) {
+            visited[u] = true;
+            s[u] = low[u] = time++;
+            for (int v : adj.get(u)) {
+                if (v == p) continue;
+                if (visited[v]) {
+                    low[u] = Math.min(low[u], s[v]);
+                } else {
+                    dfs(v, u);
+                    low[u] = Math.min(low[u], low[v]);
+                    if (low[v] > s[u]) {
+                        // Process bridge (u, v) here.
+                    }
+                }
+            }
+        }
+
+        void bridges() {
+            time = 0;
+            visited = new boolean[n];
+            s = new int[n];
+            low = new int[n];
+            Arrays.fill(s, -1);
+            Arrays.fill(low, -1);
+            for (int i = 0; i < n; i++) {
+                if (!visited[i]) {
+                    dfs(i, -1);
+                }
+            }
+        }
+    }
 }
