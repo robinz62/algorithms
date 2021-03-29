@@ -203,3 +203,5 @@ class SegmentTree {
         return combine(resl, resr);
     }
 }
+
+// TODO: object-based segment tree, to support sparse
