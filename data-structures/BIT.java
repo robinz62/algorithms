@@ -1,7 +1,9 @@
 class BIT {
     int[] bit;
+
+    // n is the maximum index that can be queried/modified.
     BIT(int n) {
-        bit = new int[n+1];
+        bit = new int[n+2];
     }
     BIT(int[] arr) {
         bit = new int[arr.length + 1];
