@@ -89,6 +89,26 @@ public class Misc {
     }
 
     /**
+     * Input: an array A of size 2^N.
+     * Output: An array [count], where count[mask] is the sum over A[sub],
+     * for all submasks of mask.
+     * Source: https://codeforces.com/blog/entry/45223
+     *
+     * To obtain counts over supermasks of a mask, change the if-conditional to
+     * be (... == 0) rather than (... > 0).
+     *
+     * Runtime: O(N * 2^N)
+     */
+    public static int[] sumOverSubsets(int[] A, int N) {
+        int[] F = new int[1 << N];
+        for (int i = 0; i < (1 << N); i++) F[i] = A[i];
+        for (int i = 0; i < N; i++)
+            for (int mask = 0; mask < (1 << N); mask++)
+                if ((mask & (1 << i)) > 0) F[mask] += F[mask ^ (1 << i)];
+        return F;
+    }
+
+    /**
      * Code snippet to coordinate-compress the input array. Remove the last line
      * if you don't want to modify the input array in place.
      */

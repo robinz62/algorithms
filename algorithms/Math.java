@@ -1,6 +1,9 @@
 import java.util.*;
 
 // TODO: mobius function, totient function seive
+// Other sieve resources:
+// - https://codeforces.com/blog/entry/22229
+// - https://codeforces.com/blog/entry/8989
 
 // Contains assorted math-related algorithms.
 public class Math {
