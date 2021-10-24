@@ -98,6 +98,21 @@ public class Math {
         return a == 0 ? b : gcd(b % a, a);
     }
 
+    // Returns gcd(a, b) and computes [x, y] such that ax + by = gcd(a, b).
+    // Works for negative numbers.
+    public static int gcd(int a, int b, int[] xy) {
+        if (b == 0) {
+            xy[0] = 1;
+            xy[1] = 0;
+            return a;
+        }
+        int[] xy1 = new int[2];
+        int d = gcd(b, a % b, xy1);
+        xy[0] = xy1[1];
+        xy[1] = xy1[0] - xy1[1] * (a / b);
+        return d;
+    }
+
     // Returns the least common multiple of the specified numbers (a) and (b).
     // O(log n).
     public static int lcm(int a, int b) {
