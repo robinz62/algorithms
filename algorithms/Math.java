@@ -82,6 +82,7 @@ public class Math {
         List<Integer> primes = new ArrayList<>();
         boolean[] prime = new boolean[n + 1];
         Arrays.fill(prime, true);
+        prime[0] = prime[1] = false;
         for (int i = 2; i <= n; i++) {
             if (prime[i]) primes.add(i);
             for (int j = 0; j < primes.size() && i * primes.get(j) <= n; j++) {
