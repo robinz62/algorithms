@@ -30,6 +30,7 @@ public class Graphs {
      */
     void bfs(int[][] A, boolean[][] visited, int i, int j) {
         Deque<int[]> q = new ArrayDeque<>();
+        visited[i][j] = true;
         q.addLast(new int[]{i, j});
         while (!q.isEmpty()) {
             int[] u = q.removeFirst();
