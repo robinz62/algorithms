@@ -1,24 +1,19 @@
 import java.util.*;
 
-/**
- * Implementations of the solution to the Longest Increasing Subsequence problem
- * for various input types where the subsequences are strictly increasing. Runs
- * in O(n log n).
- */
+// O(n log n) algorithm for LIS
 public class LIS {
     
-    /**
-     * Returns an array of the indices of the elements comprising a longest
-     * increasing subsequence.
-     * 
-     * dp[i] is the index of the smallest element that terminates an increasing
-     * subsequence of length i + 1.
-     * 
-     * to[i] contains the index of the previous element for the increasing
-     * subsequence ending at index i. used for reconstructing the solution.
-     * 
-     * len stores the length of the longest increasing subsequence found.
-     */
+    // Returns an array of the indices of the elements comprising a longest
+    // increasing subsequence.
+    //
+    // Explanation:
+    // dp[i] is the index of the smallest element that terminates an increasing
+    // subsequence of length i + 1.
+    //
+    // to[i] contains the index of the previous element for the increasing
+    // subsequence ending at index i. used for reconstructing the solution.
+    //
+    // len stores the length of the longest increasing subsequence found.
     public static int[] lis(int[] nums) {
         Integer[] dp = new Integer[nums.length];
         int[] to = new int[nums.length];
@@ -48,16 +43,13 @@ public class LIS {
         return indices;
     }
 
-    /**
-     * Returns the length of a longest increasing subsequence for when
-     * reconstructing the solution is not necessary. It has a slightly simpler
-     * dynamic programming definition and is much more concise.
-     * 
-     * dp[i] is the smallest element that terminates an increasing subsequence
-     * of length i + 1.
-     * 
-     * len stores the length of the longest increasing subsequence found.
-     */
+    // Returns the length of a longest increasing subsequence.
+    //
+    // Explanation:
+    // dp[i] is the smallest element that terminates an increasing subsequence
+    // of length i + 1.
+    //
+    // len stores the length of the longest increasing subsequence found.
     public static int lengthOfLis(int[] arr) {
         int[] dp = new int[arr.length];
         int len = 0;

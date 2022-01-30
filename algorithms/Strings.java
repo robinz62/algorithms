@@ -44,8 +44,8 @@ public class Strings {
     // Returns the length of the longest palindromic substring.
     // 
     // d1[i] stores odd-length palindromes. d2[i] stores even-length
-    // palindromes. For d1, i is the center of the palindrome, and the length of
-    // the palindrome is d1[i]*2 - 1. For d2, i is the right-center of the
+    // palindromes. For d1, i is the center of the palindrome, and the length
+    // of the palindrome is d1[i]*2 - 1. For d2, i is the right-center of the
     // palindrome, and the length of the palindrome is d2[i]*2.
     //
     public static int manacher(String str) {

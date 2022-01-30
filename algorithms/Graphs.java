@@ -1,19 +1,16 @@
 import java.util.*;
 
-/**
- * Various graph-related algorithms.
- */
+// TODO: copy-pasteable implementations of common graph algs would be nice
+// e.g. dijkstra, bellman-ford, floyd warshall, etc.
+
+// Various graph algorithms
 public class Graphs {
 
-    /**
-     * Used for graph traversals in matrix graphs.
-     */
+    // directions for matrix graphs
     int[][] dirs = new int[][]{{1,0}, {-1,0}, {0,1}, {0,-1}};
 
-    /**
-     * DFS skeleton for matrix graphs where edges join adjacent cells. This
-     * function assumes the given entry has already been marked visited.
-     */
+    // DFS skeleton for matrix graphs where edges join adjacent cells. This
+    // function assumes the given entry has already been marked visited.
     void dfs(int[][] A, boolean[][] visited, int i, int j) {
         for (int[] dir : dirs) {
             int r = i+dir[0];
@@ -25,9 +22,7 @@ public class Graphs {
         }
     }
 
-    /**
-     * BFS skeleton for matrix graphs where edges join adjacent cells.
-     */
+    // BFS skeleton for matrix graphs where edges join adjacent cells.
     void bfs(int[][] A, boolean[][] visited, int i, int j) {
         Deque<int[]> q = new ArrayDeque<>();
         visited[i][j] = true;
@@ -45,9 +40,7 @@ public class Graphs {
         }
     }
 
-    /**
-     * Finds bridges of a graph.
-     */
+    // Finds bridges of a graph.
     class Bridges {
         int time;
         int n;

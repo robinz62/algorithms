@@ -3,11 +3,11 @@
 // 2) standard segment tree with friendly indexing
 // 3) segment tree with range updates
 
-/**
- * Compact segment tree (2n space) based on
- * http://codeforces.com/blog/entry/18051. Doesn't allow more complicated
- * behavior like traversing from root.
- */
+// TODO: object-based segment tree, to support sparse
+
+// Compact segment tree (2n space) based on
+// http://codeforces.com/blog/entry/18051. Doesn't allow more complicated
+// behavior like traversing from root.
 class SegmentTree {
     int n;
     int[] st;
@@ -56,11 +56,9 @@ class SegmentTree {
     }
 }
 
-/**
- * A standard segment tree, where node i has children i*2 and i*2+1. This
- * allows traversing up/down the segment tree as needed for more involved
- * types of queries.
- */
+// A standard segment tree, where node i has children i*2 and i*2+1. This
+// allows traversing up/down the segment tree as needed for more involved
+// types of queries.
 class SegmentTree {
     int n;
     int[] st;
@@ -116,14 +114,12 @@ class SegmentTree {
     }
 }
 
-/**
- * Segment tree which supports range updates. Note lazyFunction, which governs
- * how updates are applied to node values as well as other lazy values.
- * 
- * Examples:
- *   for range add, return currVal + lazyVal
- *   for range assign, return lazyVal
- */
+// Segment tree which supports range updates. Note lazyFunction, which governs
+// how updates are applied to node values as well as other lazy values.
+// 
+// Examples:
+//   for range add, return currVal + lazyVal
+//   for range assign, return lazyVal
 class SegmentTree {
     int n;
     int[] st;
@@ -203,5 +199,3 @@ class SegmentTree {
         return combine(resl, resr);
     }
 }
-
-// TODO: object-based segment tree, to support sparse

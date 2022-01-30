@@ -1,11 +1,9 @@
-/**
- * A class representing an exact fraction. This class is immutable. For
- * purposes of equality testing, all fractions constructed with a denominator
- * of 0 are considered equal.
- *
- * This implementation uses 64 bit integers internally for data and operations.
- * Hence, the product of any numerator/denominator should be < 2^63-1.
- */
+// A class representing an exact fraction. This class is immutable. For
+// purposes of equality testing, all fractions constructed with a denominator
+// of 0 are considered equal.
+//
+// This implementation uses 64 bit integers internally for data and operations.
+// Hence, the product of any numerator/denominator should be < 2^63.
 class Fraction implements Comparable<Fraction> {
     final long n;
     final long d;

@@ -82,17 +82,15 @@ class Heap {
 }
 
 
-/**
- * A binary heap that supports generic values and priorities. As this heap
- * supports decrease-key, the values must be unique (based on the V's equals
- * method).
- *
- * If a comparator is not provided, K must implement Comparable<K>.
- * 
- * WARNING: This heap's accomodation of generic values has caused it to TLE on
- * some problems, mostly due to the use of the Hashmap. Prefer the map-less
- * implementation if possible.
- */
+// A binary heap that supports generic values and priorities. As this heap
+// supports decrease-key, the values must be unique (based on the V's equals
+// method).
+//
+// If a comparator is not provided, K must implement Comparable<K>.
+// 
+// WARNING: This heap's accomodation of generic values has caused it to TLE on
+// some problems, mostly due to the use of the Hashmap. Prefer the map-less
+// implementation if possible.
 class Heap<V, K> {
     List<Entry> heap = new ArrayList<>();
     Map<V, Integer> indexOfValue = new HashMap<>();

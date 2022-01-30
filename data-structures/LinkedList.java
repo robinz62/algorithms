@@ -1,8 +1,6 @@
-/**
- * A linked list implementation that provides access to the underlying nodes.
- * Features: O(1) deletion of specific node, O(1) insertion given relative
- * position to an existing node, O(1) swapping with node on left.
- */
+// A linked list implementation that provides access to the underlying nodes.
+// Features: O(1) deletion of specific node, O(1) insertion given relative
+// position to an existing node, O(1) swapping with node on left.
 class LinkedList {
     ListNode head;
     ListNode tail;

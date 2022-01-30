@@ -1,11 +1,9 @@
 import java.util.*;
 
-/**
- * Data structure for quickly (O(log n)) querying the kth ancestor of a vertex
- * in a tree (or forest).
- * 
- * Untested.
- */
+// Data structure for quickly (O(log n)) querying the kth ancestor of a vertex
+// in a tree (or forest).
+//
+// NOTE: untested
 class KthAncestor {
     int[][] up;
 
