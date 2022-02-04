@@ -40,6 +40,47 @@ public class Graphs {
         }
     }
 
+    // Code snippet for iterative dfs. Probably needed if n ~ 10^6 or larger.
+    // We keep track of which phase of the dfs each node is on using color.
+    // color[u] = -1 means not started
+    // color[i] means we need to process the ith node in adjacency list
+    void iterativeDfs(int n, List<List<Integer>> adj) {
+        List<Integer> stack = new ArrayList<>();
+        boolean[] visited = new boolean[n];
+        int[] color = new int[n];
+        Arrays.fill(color, -1);
+
+        // any data you want to keep track of that a stack frame would normally
+        // keep track of
+        int[] stack_data = new int[n];
+
+        // This outermost loop is not needed if you know there will only be
+        // one search
+        for (int s = 0; s < n; s++) {
+            if (visited[s]) continue;
+
+            visited[s] = true;
+            stack.add(s);
+            while (!stack.isEmpty()) {
+                int u = stack.get(stack.size() - 1);
+                if (color[u] == 0) {
+                    // do work prior to visiting neighbors
+                } else if (color[u] < adj.get(u).size()) {
+                    int v = adj.get(u).get(color[u]);
+                    if (!visited[v]) {
+                        visited[v] = true;
+                        stack.add(v);
+                    }
+                    color[u]++;
+                } else {
+                    // do work after visiting all neighbors
+                    
+                    stack.remove(stack.size() - 1);
+                }
+            }
+        }
+    }
+
     // Finds bridges of a graph.
     class Bridges {
         int time;
