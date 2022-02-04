@@ -1,8 +1,5 @@
 import java.util.*;
 
-// TODO: copy-pasteable implementations of common graph algs would be nice
-// e.g. dijkstra, bellman-ford, floyd warshall, etc.
-
 // Various graph algorithms
 public class Graphs {
 
@@ -35,6 +32,93 @@ public class Graphs {
                 if (r >= 0 && c >= 0 && r < A.length && c < A[0].length && !visited[r][c]) {
                     visited[r][c] = true;
                     q.addLast(new int[]{r, c});
+                }
+            }
+        }
+    }
+
+    // Heap must support long keys.
+    void dijkstra(int n, int s, List<List<int[]>> adj) {
+        long[] dist = new long[n];
+        Arrays.fill(dist, Long.MAX_VALUE);
+        dist[s] = 0;
+        boolean[] done = new boolean[n];
+        int[] parent = new int[n];  // optional
+        Arrays.fill(parent, -1);
+
+        Heap heap = new Heap(n);
+        for (int i = 0; i < n; i++) heap.add(i, dist[i]);
+
+        while (!heap.isEmpty()) {
+            int u = heap.extractMin();
+            done[u] = true;
+            if (dist[u] == Long.MAX_VALUE) continue;
+            for (int[] vw : adj.get(u)) {
+                int v = vw[0];
+                int w = vw[1];
+                if (dist[u] + w < dist[v]) {
+                    dist[v] = dist[u] + w;
+                    parent[v] = u;
+                    heap.decreaseKey(v, dist[v]);
+                }
+            }
+        }
+    }
+
+    void bellmanFord(int n, int s, List<int[]> edges) {
+        long[] dist = new long[n];
+        Arrays.fill(dist, Long.MAX_VALUE);
+        dist[s] = 0;
+        int[] parent = new int[n];  // optional
+        Arrays.fill(parent, -1);
+
+        for (int i = 0; i < n-1; i++) {
+            for (int[] edge : edges) {
+                int u = edge[0];
+                int v = edge[1];
+                int w = edge[2];
+                if (dist[u] != Long.MAX_VALUE && dist[u] + w < dist[v]) {
+                    dist[v] = dist[u] + w;
+                    parent[v] = u;
+                }
+
+                // Uncomment if graph is undirected
+                // if (dist[v] != Long.MAX_VALUE && dist[v] + w < dist[u]) {
+                //     dist[u] = dist[v] + w;
+                //     parent[u] = v;
+                // }
+            }
+        }
+
+        // Detect negative cycles if needed
+        for (int[] edge : edges) {
+            int u = edge[0];
+            int v = edge[1];
+            int w = edge[2];
+            if (dist[u] != Long.MAX_VALUE && dist[u] + w < dist[v]) {
+                // Negative cycle exists
+            }
+            // Uncomment if graph is undirected
+            // if (dist[v] != Long.MAX_VALUE && dist[v] + w < dist[u]) {
+            //     // Negative cycle exists
+            // }
+        }
+    }
+
+    void floydWarshall(int n, List<int[]> edges) {
+        long[][] dist = new long[n][n];
+        for (long[] row : dist) Arrays.fill(row, Long.MAX_VALUE);
+        for (int i = 0; i < n; i++) dist[i][i] = 0;
+        for (int[] edge : edges) dist[edge[0]][edge[1]] = edge[2];
+        // Swap line above with line below if undirected
+        // for (int[] edge : edges) dist[edge[0]][edge[1]] = dist[edge[1]][edge[0]] = edge[2];
+
+        for (int k = 0; k < n; k++) {
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < n; j++) {
+                    if (dist[i][k] != Long.MAX_VALUE && dist[k][j] != Long.MAX_VALUE && dist[i][k] + dist[k][j] < dist[i][j]) {
+                        dist[i][j] = dist[i][k] + dist[k][j];
+                    }
                 }
             }
         }

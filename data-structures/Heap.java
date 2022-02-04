@@ -81,6 +81,83 @@ class Heap {
     }
 }
 
+// Same as above but has long keys, often needed when edge weights are as large as 10^9.
+class Heap {
+    int[] values;
+    long[] keys;
+    int[] valToIdx;
+    int size;
+
+    Heap(int n) {
+        values = new int[n];
+        keys = new long[n];
+        valToIdx = new int[n];
+        Arrays.fill(valToIdx, -1);
+    }
+
+    boolean isEmpty() { return size == 0; }
+    boolean containsValue(int value) { return valToIdx[value] != -1; }
+    long getKey(int value) { return keys[valToIdx[value]]; }
+    int peek() { return values[0]; }
+
+    void add(int value, int key) {
+        values[size] = value;
+        keys[size] = key;
+        valToIdx[value] = size;
+        size++;
+        decreaseKey(value, key);
+    }
+
+    void decreaseKey(int value, long newKey) {
+        int i = valToIdx[value];
+        int pi = parent(i);
+        keys[i] = newKey;
+        while (i > 0 && keys[pi] > keys[i]) {
+            int tempV = values[i];
+            long tempK = keys[i];
+            values[i] = values[pi];
+            keys[i] = keys[pi];
+            valToIdx[values[pi]] = i;
+            values[pi] = tempV;
+            keys[pi] = tempK;
+            valToIdx[tempV] = pi;
+            i = pi;
+            pi = parent(i);
+        }
+    }
+
+    int extractMin() {
+        int min = values[0];
+        values[0] = values[size-1];
+        keys[0] = keys[size-1];
+        valToIdx[values[0]] = 0;
+        size--;
+        valToIdx[min] = -1;
+        heapify(0);
+        return min;
+    }
+
+    int parent(int index) { return index == 0 ? 0 : (index - 1) >> 1; }
+    int left(int index) { return (index << 1) + 1; }
+    int right(int index) { return (index << 1) + 2; }
+    void heapify(int i) {
+        int l = left(i);
+        int r = right(i);
+        int smallest = i;
+        if (l < size && keys[l] < keys[smallest]) smallest = l;
+        if (r < size && keys[r] < keys[smallest]) smallest = r;
+        if (smallest == i) return;
+        int tempV = values[i];
+        long tempK = keys[i];
+        values[i] = values[smallest];
+        keys[i] = keys[smallest];
+        valToIdx[values[i]] = i;
+        values[smallest] = tempV;
+        keys[smallest] = tempK;
+        valToIdx[tempV] = smallest;
+        heapify(smallest);
+    }
+}
 
 // A binary heap that supports generic values and priorities. As this heap
 // supports decrease-key, the values must be unique (based on the V's equals
