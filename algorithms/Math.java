@@ -191,11 +191,15 @@ public class Math {
     // new object. Runs in O(f log(k)), where f is the running time of matrix
     // multiplication.
     double[][] matrixExp(double[][] A, int k) {
-        int m = A.length;
-        int n = A[0].length;
+        int n = A.length;
+        if (k == 0) {
+            double[][] res = new double[n][n];
+            for (int i = 0; i < n; i++) res[i][i] = 1;
+            return res;
+        }
         if (k == 1) {
-            double[][] res = new double[m][n];
-            for (int i = 0; i < m; i++)
+            double[][] res = new double[n][n];
+            for (int i = 0; i < n; i++)
                 for (int j = 0; j < n; j++)
                     res[i][j] = A[i][j];
             return res;
