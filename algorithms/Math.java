@@ -210,4 +210,52 @@ public class Math {
         res = matrixMult(res, A);
         return res;
     }
+
+    // Solves a system of equation using gaussian elimination.
+    // From cp-algorithms. I haven't read much into how it works / investigated
+    // the numerical properties of this implementation.
+    //
+    // [a] represents the augmented matrix [A | b]. The answer is stored in [ans].
+    // Returns the number of solutions (0, 1, or infinity).
+    int gauss(double[][] a, double[] ans) {
+        double EPS = 1e-9;
+        int n = a.length;
+        int m = a[0].length - 1;
+
+        int[] where = new int[m];
+        Arrays.fill(where, -1);
+        for (int col = 0, row = 0; col < m && row < n; col++) {
+            int sel = row;
+            for (int i = row; i < n; i++)
+                if (Math.abs(a[i][col]) > Math.abs(a[sel][col]))
+                    sel = i;
+            if (Math.abs(a[sel][col]) < EPS)
+                continue;
+            for (int i = col; i <= m; i++) {
+                double temp = a[sel][i];
+                a[sel][i] = a[row][i];
+                a[row][i] = temp;
+            }
+            where[col] = row;
+
+            for (int i = 0; i < n; i++) {
+                if (i == row) continue;
+                double c = a[i][col] / a[row][col];
+                for (int j = col; j <= m; j++) a[i][j] -= a[row][j] * c;
+            }
+            row++;
+        }
+
+        for (int i = 0; i < m; i++)
+            if (where[i] != -1)
+                ans[i] = a[where[i]][m] / a[where[i]][i];
+        for (int i = 0; i < n; i++) {
+            double sum = 0;
+            for (int j = 0; j < m; j++) sum += ans[j] * a[i][j];
+            if (Math.abs(sum - a[i][m]) > EPS) return 0;
+        }
+
+        for (int i = 0; i < m; i++) if (where[i] == -1) return Integer.MAX_VALUE;
+        return 1;
+    }
 }
