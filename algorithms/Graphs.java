@@ -1,5 +1,10 @@
 import java.util.*;
 
+// TODO: euler circuit. test on 1634E
+// https://cp-algorithms.com/graph/euler_path.html
+// https://github.com/ShahjalalShohag/code-library/blob/master/Graph%20Theory/Euler%20Path%20Directed.cpp
+// https://github.com/ShahjalalShohag/code-library/blob/master/Graph%20Theory/Euler%20Path%20Undirected.cpp
+
 // Various graph algorithms
 public class Graphs {
 

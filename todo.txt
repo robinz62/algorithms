@@ -5,14 +5,9 @@ sparse table
 quick select
 misc > next permutation
 
-graphs > floyd-warshall
-graphs > ford-fulkerson
+graphs > ford-fulkerson / other flow
 graphs > SCC
 
-matrix multiplication, matrix exp.
-gaussian elimination
-maybe code snippet specifically for xor elimination
-
-string hashing
+xor elimination / xor basis
 
 euler circuit

@@ -27,7 +27,7 @@ class SegmentTree {
         build();
     }
 
-    void build() {
+    private void build() {
         for (int i = n - 1; i > 0; i--) {
             st[i] = combine(st[i*2], st[i*2+1]);
         }
@@ -75,7 +75,7 @@ class SegmentTree {
         build(arr, 1, 0, n-1);
     }
 
-    void build(int[] arr, int i, int l, int r) {
+    private void build(int[] arr, int i, int l, int r) {
         if (l == r) st[i] = arr[l];
         else {
             int m = l + (r - l) / 2;
@@ -197,5 +197,96 @@ class SegmentTree {
         int resl = query(2*v, l, m, ql, Math.min(qr, m));
         int resr = query(2*v+1, m+1, r, Math.max(ql, m+1), qr);
         return combine(resl, resr);
+    }
+}
+
+// This class uses the convension of [n] for rows and [m] for columns.
+// The variables [x] and [y] denote row- and column-related logic, respectively
+// (unrelated to cartesian coordinate convensions).
+class SegmentTree2D {
+    int n;
+    int m;
+    int[][] st;
+
+    // Modify identity and combine together.
+    int identity = 0;
+    int combine(int a, int b) {
+        return a + b;
+    }
+
+    SegmentTree2D(int[][] mat) {
+        n = mat.length;
+        m = mat[0].length;
+        st = new int[4*n][4*m];
+        buildRows(mat, 1, 0, n-1);
+    }
+
+    private void buildCols(int[][] mat, int i, int lx, int rx, int j, int ly, int ry) {
+        if (ly == ry) {
+            if (lx == rx) st[i][j] = mat[lx][ly];
+            else st[i][j] = combine(st[2*i][j], st[2*i+1][j]);
+        } else {
+            int my = ly + (ry - ly) / 2;
+            buildCols(mat, i, lx, rx, 2*j, ly, my);
+            buildCols(mat, i, lx, rx, 2*j+1, my+1, ry);
+            st[i][j] = combine(st[i][2*j], st[i][2*j+1]);
+        }
+    }
+
+    private void buildRows(int[][] mat, int i, int lx, int rx) {
+        if (lx != rx) {
+            int mx = lx + (rx - lx) / 2;
+            buildRows(mat, 2*i, lx, mx);
+            buildRows(mat, 2*i+1, mx+1, rx);
+        }
+        buildCols(mat, i, lx, rx, 1, 0, m-1);
+    }
+
+    private void modifyCols(int r, int c, int val, int i, int lx, int rx, int j, int ly, int ry) {
+        if (ly == ry) {
+            if (lx == rx) st[i][j] = val;
+            else st[i][j] = combine(st[2*i][j], st[2*i+1][j]);
+        } else {
+            int my = ly + (ry - ly) / 2;
+            if (c <= my) modifyCols(r, c, val, i, lx, rx, 2*j, ly, my);
+            else modifyCols(r, c, val, i, lx, rx, 2*j+1, my+1, ry);
+            st[i][j] = combine(st[i][2*j], st[i][2*j+1]);
+        }
+    }
+
+    private void modifyRows(int r, int c, int val, int i, int lx, int rx) {
+        if (lx != rx) {
+            int mx = lx + (rx - lx) / 2;
+            if (r <= mx) modifyRows(r, c, val, 2*i, lx, mx);
+            else modifyRows(r, c, val, 2*i+1, mx+1, rx);
+        }
+        modifyCols(r, c, val, i, lx, rx, 1, 0, m-1);
+    }
+
+    void modify(int r, int c, int val) {
+        modifyRows(r, c, val, 1, 0, n-1);
+    }
+
+    private int queryCols(int qly, int qry, int i, int j, int ly, int ry) {
+        if (qly > qry) return identity;
+        if (ly == qly && ry == qry) return st[i][j];
+        int my = ly + (ry - ly) / 2;
+        int resl = queryCols(qly, Math.min(qry, my), i, 2*j, ly, my);
+        int resr = queryCols(Math.max(qly, my+1), qry, i, 2*j+1, my+1, ry);
+        return combine(resl, resr);
+    }
+
+    private int queryRows(int qlx, int qrx, int qly, int qry, int i, int lx, int rx) {
+        if (qlx > qrx) return identity;
+        if (lx == qlx && rx == qrx) return queryCols(qly, qry, i, 1, 0, m-1);
+        int mx = lx + (rx - lx) / 2;
+        int resl = queryRows(qlx, Math.min(qrx, mx), qly, qry, 2*i, lx, mx);
+        int resr = queryRows(Math.max(qlx, mx+1), qrx, qly, qry, 2*i+1, mx+1, rx);
+        return combine(resl, resr);
+    }
+
+    // Note: input range is closed
+    int query(int lx, int rx, int ly, int ry) {
+        return queryRows(lx, rx, ly, ry, 1, 0, n-1);
     }
 }
